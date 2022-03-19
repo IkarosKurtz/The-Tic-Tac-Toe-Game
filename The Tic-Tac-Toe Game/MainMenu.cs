@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,7 +18,6 @@ namespace The_Tic_Tac_Toe_Game
         {
             InitializeComponent();
         }
-        
 
         #region Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -65,40 +65,112 @@ namespace The_Tic_Tac_Toe_Game
         // Gamemodes
         private void PvP_Click(object sender, EventArgs e)
         {
+            Board.boardType = 0;
             OpenBoard(new Board());
-            RenderColor.Stop();
         }
 
-       
+        private void VsCPU_Click(object sender, EventArgs e)
+        {
+            Board.boardType = 1;
+            OpenBoard(new Board());
+        }
+
         // Settings
         private void Settings_Click(object sender, EventArgs e)
         {
-            
-            OpenBoard(new Config());
-            RenderColor.Start();
+            SettingsPanel.Dock = DockStyle.Fill;
+            SettingsPanel.Visible = true;
         }
 
+        // Close
+        private void ExitToDesktop_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
         // Render
         private void Rerender()
         {
             IkarosControls.IkarosButton[] buttons = {
-            PvP, Confi
+            PvP, 
+            Confi,
+            ExitToDesktop,
+            VsCPU,
+            Themes,
+            ToggleDefault,
+            ToggleDark,
+            BackToSettings,
+            BackToMM,
+            Language
+
             };
             MenuPanel.BackColor = Classes.Themes.MenuColor;
             MovePanel.BackColor = Classes.Themes.TopPanel;
+            SettingsPanel.BackColor = Classes.Themes.MenuColor;
 
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].BackColor = Classes.Themes.ButtonsColor;
             }
         }
-        int asd = 0;
-        private void RenderColor_Tick(object sender, EventArgs e)
+
+        // GitHub Icon
+        private void GitHub_MouseEnter(object sender, EventArgs e)
         {
+            GitHub.Image = new Bitmap(Application.StartupPath + @"\Resources\Github focus.png");
+            
+        }
+
+        private void GitHub_MouseLeave(object sender, EventArgs e)
+        {
+            GitHub.Image = new Bitmap(Application.StartupPath + @"\Resources\Github.png");
+        }
+
+        private void GitHub_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/IkarosKurtz/The-Tic-Tac-Toe-Game");
+        }
+
+        // Settings
+        private void BackToMM_Click(object sender, EventArgs e)
+        {
+            SettingsPanel.Visible = false;
+        }
+
+        private void Themes_Click(object sender, EventArgs e)
+        {
+            ToggleDark.Visible = true;
+            ToggleDefault.Visible = true;
+            BackToSettings.Visible = true;
+
+            Themes.Visible = false;
+            Language.Visible = false;
+            BackToMM.Visible = false;
+        }
+
+        private void BackToSettings_Click(object sender, EventArgs e)
+        {
+            ToggleDark.Visible = false;
+            ToggleDefault.Visible = false;
+            BackToSettings.Visible = false;
+
+            Themes.Visible = true;
+            Language.Visible = true;
+            BackToMM.Visible = true;
+        }
+
+        private void ToggleDefault_Click(object sender, EventArgs e)
+        {
+            Classes.Themes.ToggleTheme(0);
             Rerender();
-            label2.Text = asd.ToString();
-            asd++;
+            ExitApp_MouseLeave(sender, e);
+        }
+
+        private void ToggleDark_Click(object sender, EventArgs e)
+        {
+            Classes.Themes.ToggleTheme(1);
+            Rerender();
+            ExitApp_MouseLeave(sender, e);
         }
     }
 }

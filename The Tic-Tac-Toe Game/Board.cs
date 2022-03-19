@@ -18,21 +18,35 @@ namespace The_Tic_Tac_Toe_Game
         static IkarosControls.IkarosButton[,] ThirdFloor = new IkarosControls.IkarosButton[3, 3];
 
         public bool firstPlayerStarts = false;
-        public int index = -1, x = 322, y = 24, getTurn = 1;
+        public int index = 1, x = 322, y = 24, getTurn = 1;
         public int setDraw = 27;
         Color prevBoardColor = Classes.Themes.BoardColor;
+        bool qwe = false;
 
         string setTurn => getTurn == 1 ? "X" : "O";
+
+        public static int boardType = 0;
 
         // Board Controls
         public Board()
         {
             InitializeComponent();
-            // Recolor Controls
             this.BackColor = Classes.Themes.BackGroundColor;
-            BackToMM.BackColor = Classes.Themes.BoardColor;
             Restart.BackColor = Classes.Themes.BoardColor;
+            BackToMM.BackColor = Classes.Themes.BoardColor;
 
+            if(boardType == 0)
+                PlayerVsPlayer();
+            else
+                PlayerVsCpu();
+            
+            ThinkAni.Start();
+        }
+
+
+        // Player vs player board
+        private void PlayerVsPlayer()
+        {
             // First part of the board
             firstPlayerStarts = false;
             FirstFloor[0, 0] = new IkarosControls.IkarosButton();
@@ -103,7 +117,6 @@ namespace The_Tic_Tac_Toe_Game
                 y = 420;
             }
         }
-
         private void PlayerSelection(object sender, EventArgs e)
         {
             IkarosControls.IkarosButton clicked = sender as IkarosControls.IkarosButton;
@@ -111,21 +124,25 @@ namespace The_Tic_Tac_Toe_Game
 
             if (clicked.BackgroundColor != Classes.Themes.SecondPlayer && clicked.BackgroundColor != Classes.Themes.FirstPlayer)
             {
-                if (index % 2 == 0)
+                if (index == 1)
                 {
                     getTurn--;
                     clicked.Text = setTurn;
                     clicked.BackgroundColor = Classes.Themes.SecondPlayer;
                     index++;
-                    index2 = Convert.ToString(index % 2 + 1);
+                    SecondThink.Text = "";
+                    Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_down.png");
+                    index2 = "1";
                 }
                 else
                 {
                     getTurn++;
                     clicked.Text = setTurn;
                     clicked.BackgroundColor = Classes.Themes.FirstPlayer;
-                    index++;
-                    index2 = Convert.ToString(index % 2 + 1);
+                    index--;
+                    FirstThink.Text = "";
+                    Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_up.png");
+                    index2 = "2";
                 }
 
                 setDraw--;
@@ -194,8 +211,213 @@ namespace The_Tic_Tac_Toe_Game
                 }
                 else
                 {
-                    MessageBox.Show("Es un empate.", "DRAW", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Winner.Text = "Draw";
+                    panel1.BackgroundImage = new Bitmap(Application.StartupPath + @"\Resources\Winner_image_default.png");
                 }
+            }
+        }
+
+
+        // Player vs CPU board
+        private void PlayerVsCpu()
+        {
+            // Recolor Controls
+            this.BackColor = Classes.Themes.BackGroundColor;
+            BackToMM.BackColor = Classes.Themes.BoardColor;
+            Restart.BackColor = Classes.Themes.BoardColor;
+
+            // First part of the board
+            firstPlayerStarts = false;
+            FirstFloor[0, 0] = new IkarosControls.IkarosButton();
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    FirstFloor[i, j] = new IkarosControls.IkarosButton();
+                    this.Controls.Add(FirstFloor[i, j]);
+                    FirstFloor[i, j].Width = 65;
+                    FirstFloor[i, j].Height = 65;
+                    FirstFloor[i, j].Location = new Point(x, y);
+                    FirstFloor[i, j].BackgroundColor = Classes.Themes.BoardColor;
+                    FirstFloor[i, j].Text = "";
+                    FirstFloor[i, j].BorderRadius = 5;
+                    y += 67;
+                    FirstFloor[i, j].Click += new System.EventHandler(CpuTurn);
+                }
+                x += 67;
+                y = 24;
+            }
+
+            // Second part of the board
+            y = 222;
+            SecondFloor[0, 0] = new IkarosControls.IkarosButton();
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    SecondFloor[i, j] = new IkarosControls.IkarosButton();
+                    this.Controls.Add(SecondFloor[i, j]);
+                    SecondFloor[i, j].Width = 65;
+                    SecondFloor[i, j].Height = 65;
+                    SecondFloor[i, j].Location = new Point(x, y);
+                    SecondFloor[i, j].BackgroundColor = Classes.Themes.BoardColor;
+                    SecondFloor[i, j].Text = "";
+                    SecondFloor[i, j].BorderRadius = 5;
+                    y += 67;
+                    SecondFloor[i, j].Click += new System.EventHandler(CpuTurn);
+                }
+                x += 67;
+                y = 222;
+            }
+
+            // Canceled button
+            SecondFloor[1, 1].Enabled = false;
+            SecondFloor[1, 1].BackColor = Classes.Themes.ButtonCanceled;
+
+            // Third part of the board
+            y = 420;
+            ThirdFloor[0, 0] = new IkarosControls.IkarosButton();
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    ThirdFloor[i, j] = new IkarosControls.IkarosButton();
+                    this.Controls.Add(ThirdFloor[i, j]);
+                    ThirdFloor[i, j].Width = 65;
+                    ThirdFloor[i, j].Height = 65;
+                    ThirdFloor[i, j].Location = new Point(x, y);
+                    ThirdFloor[i, j].BackgroundColor = Classes.Themes.BoardColor;
+                    ThirdFloor[i, j].Text = "";
+                    ThirdFloor[i, j].BorderRadius = 5;
+                    y += 67;
+                    ThirdFloor[i, j].Click += new System.EventHandler(CpuTurn);
+                }
+                x += 67;
+                y = 420;
+            }
+        }
+
+        private void CpuTurn(object sender, EventArgs e)
+        {
+            IkarosControls.IkarosButton clicked = sender as IkarosControls.IkarosButton;
+            String Turn;
+
+            if (clicked.BackgroundColor != Classes.Themes.SecondPlayer && clicked.BackgroundColor != Classes.Themes.FirstPlayer)
+            {
+                if (index == 1)
+                {
+                    clicked.Text = "X";
+                    clicked.BackgroundColor = Classes.Themes.FirstPlayer;
+                    index++;
+                    qwe = true;
+                    Turn = 1.ToString();
+                }
+                else
+                {
+
+                }
+
+                // Columns
+                if (FirstFloor[0, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 0].BackColor && qwe == false)
+                {
+                    if (FirstFloor[0, 2].BackColor != Classes.Themes.FirstPlayer && FirstFloor[0, 2].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(0, 2);
+                }
+                if (FirstFloor[0, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 2].BackColor && qwe == false)
+                {
+                    if (FirstFloor[0, 0].BackColor != Classes.Themes.FirstPlayer && FirstFloor[0, 0].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(0, 0);
+                }
+
+                if (FirstFloor[1, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 0].BackColor && qwe == false)
+                {
+                    if (FirstFloor[1, 2].BackColor != Classes.Themes.FirstPlayer && FirstFloor[1, 2].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(1, 2);
+                }
+                if (FirstFloor[1, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 2].BackColor && qwe == false)
+                {
+                    if (FirstFloor[1, 0].BackColor != Classes.Themes.FirstPlayer && FirstFloor[1, 0].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(1, 0);
+                }
+
+                if (FirstFloor[2, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 0].BackColor && qwe == false)
+                {
+                    if (FirstFloor[2, 2].BackColor != Classes.Themes.FirstPlayer && FirstFloor[2, 2].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(2, 2);
+                }
+                if (FirstFloor[2, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 2].BackColor && qwe == false)
+                {
+                    if (FirstFloor[2, 0].BackColor != Classes.Themes.FirstPlayer && FirstFloor[2, 0].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(2, 0);
+                }
+
+                // Rows
+                if (FirstFloor[1, 0].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[0, 0].BackColor && qwe == false)
+                {
+                    if (FirstFloor[2, 0].BackColor != Classes.Themes.FirstPlayer && FirstFloor[0, 2].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(2, 0);
+                }
+                if (FirstFloor[1, 0].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[2, 0].BackColor && qwe == false)
+                {
+                    if (FirstFloor[0, 0].BackColor != Classes.Themes.FirstPlayer && FirstFloor[0, 0].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(0, 0);
+                }
+
+                if (FirstFloor[1, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 1].BackColor && qwe == false)
+                {
+                    if (FirstFloor[2, 1].BackColor != Classes.Themes.FirstPlayer && FirstFloor[2, 1].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(2, 1);
+                }
+                if (FirstFloor[1, 1].BackColor == Classes.Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 1].BackColor && qwe == false)
+                {
+                    if (FirstFloor[0, 1].BackColor != Classes.Themes.FirstPlayer && FirstFloor[0, 1].BackColor != Classes.Themes.SecondPlayer)
+                        CpuChoice(0, 1);
+                }
+                Random ran = new Random();
+                int der, iz;
+                do{
+                    der = ran.Next(0, 3);
+                    iz = ran.Next(0, 3);
+                } while(FirstFloor[der, iz].BackColor == Classes.Themes.SecondPlayer || FirstFloor[der, iz].BackColor == Classes.Themes.FirstPlayer);
+
+                CpuChoice(der , iz);
+
+                index--;
+                setDraw--;
+
+                if (setDraw != 0)
+                {
+                    
+
+                }
+                else
+                {
+                    Winner.Text = "Draw";
+                    panel1.BackgroundImage = new Bitmap(Application.StartupPath + @"\Resources\Winner_image_default.png");
+                }
+            }
+        }
+
+        private void CpuChoice(int x, int y)
+        {
+            FirstFloor[x, y].BackColor = Classes.Themes.SecondPlayer;
+            FirstFloor[x, y].Text = "O";
+            qwe = false;
+        }
+
+        private void ThinkAni_Tick(object sender, EventArgs e)
+        {
+            if(index == 1)
+            {
+                SecondThink.Text += ".";
+                if (SecondThink.Text == "....")
+                    SecondThink.Text = "";
+            }
+            else
+            {
+                FirstThink.Text += ".";
+                if (FirstThink.Text == "....")
+                    FirstThink.Text = "";
             }
         }
 
@@ -203,6 +425,12 @@ namespace The_Tic_Tac_Toe_Game
         private void WinnerMessage(string index2)
         {
             Winner.Text = "Player " + index2 + " Win";
+            if (index % 2 == 0)
+                panel1.BackgroundImage = new Bitmap(Application.StartupPath + Classes.Themes.FirstPlayerBanner);
+            else
+                panel1.BackgroundImage = new Bitmap(Application.StartupPath + Classes.Themes.SecondPlayerBanner);
+
+            panel1.Visible = true;
             Winner.Visible = true;
 
             for(int i = 0; i < 3; i++)
@@ -247,18 +475,22 @@ namespace The_Tic_Tac_Toe_Game
             SecondFloor[1, 1].BackColor = Classes.Themes.ButtonCanceled;
         }
 
-
         // Buttons
         private void BackToMM_Click(object sender, EventArgs e)
         {
+            Restart_Click(sender, e);
             this.Close();
-
+            ThinkAni.Stop();
         }
         private void Restart_Click(object sender, EventArgs e)
         {
             setDraw = 27;
             Classes.Themes.BoardColor = prevBoardColor;
+            panel1.Visible = false;
             Winner.Visible = false;
+            FirstThink.Text = "";
+            SecondThink.Text = "";
+            Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_up.png");
 
             for (int i = 0; i < 3; i++)
             {

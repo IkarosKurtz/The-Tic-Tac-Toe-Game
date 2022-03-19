@@ -32,7 +32,6 @@
             this.ChooseTheme = new IkarosControls.IkarosButton();
             this.Tittle2 = new System.Windows.Forms.Label();
             this.Language = new IkarosControls.IkarosButton();
-            this.MyGitHub = new IkarosControls.IkarosButton();
             this.ToggleDefault = new IkarosControls.IkarosButton();
             this.ToggleDark = new IkarosControls.IkarosButton();
             this.BackMainMenu = new IkarosControls.IkarosButton();
@@ -100,26 +99,6 @@
             this.Language.Text = "Language";
             this.Language.TextColor = System.Drawing.Color.White;
             this.Language.UseVisualStyleBackColor = false;
-            // 
-            // MyGitHub
-            // 
-            this.MyGitHub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
-            this.MyGitHub.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
-            this.MyGitHub.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.MyGitHub.BorderRadius = 0;
-            this.MyGitHub.BorderSize = 0;
-            this.MyGitHub.FlatAppearance.BorderSize = 0;
-            this.MyGitHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MyGitHub.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MyGitHub.ForeColor = System.Drawing.Color.White;
-            this.MyGitHub.Location = new System.Drawing.Point(512, 253);
-            this.MyGitHub.Name = "MyGitHub";
-            this.MyGitHub.Size = new System.Drawing.Size(202, 48);
-            this.MyGitHub.TabIndex = 4;
-            this.MyGitHub.Text = "GitHub";
-            this.MyGitHub.TextColor = System.Drawing.Color.White;
-            this.MyGitHub.UseVisualStyleBackColor = false;
-            this.MyGitHub.Click += new System.EventHandler(this.MyGitHub_Click);
             // 
             // ToggleDefault
             // 
@@ -210,7 +189,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(202)))), ((int)(((byte)(165)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.BackMainMenu);
-            this.Controls.Add(this.MyGitHub);
             this.Controls.Add(this.Language);
             this.Controls.Add(this.ChooseTheme);
             this.Controls.Add(this.Tittle1);
@@ -233,7 +211,6 @@
         private System.Windows.Forms.Label Tittle1;
         private System.Windows.Forms.Label Tittle2;
         private IkarosControls.IkarosButton Language;
-        private IkarosControls.IkarosButton MyGitHub;
         private IkarosControls.IkarosButton ToggleDefault;
         private IkarosControls.IkarosButton BackMainMenu;
         private IkarosControls.IkarosButton BackSettings;

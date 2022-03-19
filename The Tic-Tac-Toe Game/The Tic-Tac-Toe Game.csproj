@@ -57,12 +57,6 @@
     </Compile>
     <Compile Include="Classes\Language.cs" />
     <Compile Include="Classes\Themes.cs" />
-    <Compile Include="Config.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Config.Designer.cs">
-      <DependentUpon>Config.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,9 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Board.resx">
       <DependentUpon>Board.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Config.resx">
-      <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -105,6 +96,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\exit_icon-icons.com_70975.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Winner_image_default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Resources\Exit_Icon.png" />
+    <None Include="Resources\Github.png" />
+    <None Include="Resources\black-up-arrow-png-6.png" />
+    <None Include="Resources\png-clipart-arrow-down-android-down-arrow-hand-desktop-wallpaper-thumbnail.png" />
+    <Content Include="bin\Debug\Resources\Arrow down.png" />
+    <Content Include="bin\Debug\Resources\Arrow up.png" />
+    <Content Include="bin\Debug\Resources\Arrow_down.png" />
+    <Content Include="bin\Debug\Resources\Arrow_up.png" />
+    <Content Include="bin\Debug\Resources\Github focus.png" />
+    <Content Include="bin\Debug\Resources\Github.png" />
+    <Content Include="bin\Debug\Resources\Logo.png" />
+    <Content Include="bin\Debug\Resources\Winner_image_DefaultD.png" />
+    <Content Include="bin\Debug\Resources\Winner_image_FirstPlayerD.png" />
+    <Content Include="bin\Debug\Resources\Winner_image_SecondPlayerD.png" />
+    <Content Include="Resources\Winner_image_FirstPlayerD.png" />
+    <Content Include="Resources\Winner_image_SecondPlayerD.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

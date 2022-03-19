@@ -23,6 +23,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
 
         public static Color ButtonCanceled = Color.FromArgb(46, 45, 46);
 
+        public static string FirstPlayerBanner = @"\Resources\Winner_image_FirstPlayerD.png";
+        public static string SecondPlayerBanner = @"\Resources\Winner_image_SecondPlayerD.png";
+        public static string DrawBanner = @"\Resources\Winner_image_DefaultD.png";
+
         // Default Theme
 
         #region Default
@@ -45,6 +49,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
 
         private static readonly Color buttoncanceled = Color.FromArgb(46, 45, 46);
 
+        private static readonly string firstplayerbanner = @"\Resources\Winner_image_FirstPlayerD.png";
+        private static readonly string secondplayerbanner = @"\Resources\Winner_image_SecondPlayerD.png";
+        private static readonly string drawbanner = @"\Resources\Winner_image_DefaultD.png";
+
         #endregion Default
 
         // Dark Theme
@@ -66,6 +74,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
         private static readonly Color secondplayerD = Color.FromArgb(185, 82, 84);
         private static readonly Color firstplayerdisableD = Color.FromArgb(76, 144, 125);
         private static readonly Color secondplayerdisableD = Color.FromArgb(167, 68, 69);
+
+        private static readonly string firstplayerbannerD = @"\Resources\Winner_image_FirstPlayerD.png";
+        private static readonly string secondplayerbannerD = @"\Resources\Winner_image_SecondPlayerD.png";
+        private static readonly string drawbannerD = @"\Resources\Winner_image_DefaultD.png";
 
         #endregion Dark
 
@@ -90,6 +102,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
                     SecondPlayerDisable = secondplayerdisable;
                     ButtonCanceled = buttoncanceled;
 
+                    FirstPlayerBanner = firstplayerbanner;
+                    SecondPlayerBanner = secondplayerbanner;
+                    DrawBanner = drawbanner;
+
                     break;
 
                 case 1:
@@ -107,6 +123,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
                     FirstPlayerDisable = firstplayerdisableD;
                     SecondPlayerDisable = secondplayerdisableD;
                     ButtonCanceled = buttoncanceled;
+
+                    FirstPlayerBanner = firstplayerbannerD;
+                    SecondPlayerBanner = secondplayerbannerD;
+                    DrawBanner = drawbannerD;
 
                     break;
             }
