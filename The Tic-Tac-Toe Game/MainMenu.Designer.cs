@@ -35,23 +35,22 @@
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.BackToMM = new IkarosControls.IkarosButton();
             this.Language = new IkarosControls.IkarosButton();
-            this.Themes = new IkarosControls.IkarosButton();
+            this.SelectTheme = new IkarosControls.IkarosButton();
             this.label3 = new System.Windows.Forms.Label();
             this.BackToSettings = new IkarosControls.IkarosButton();
             this.ToggleDefault = new IkarosControls.IkarosButton();
             this.ToggleDark = new IkarosControls.IkarosButton();
+            this.GitHub = new System.Windows.Forms.PictureBox();
             this.VsCPU = new IkarosControls.IkarosButton();
             this.ExitToDesktop = new IkarosControls.IkarosButton();
             this.Confi = new IkarosControls.IkarosButton();
             this.MovePanel = new System.Windows.Forms.Panel();
             this.ExitApp = new System.Windows.Forms.PictureBox();
-            this.GitHub = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.MenuPanel.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GitHub)).BeginInit();
             this.MovePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExitApp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GitHub)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -90,7 +89,6 @@
             // MenuPanel
             // 
             this.MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(202)))), ((int)(((byte)(165)))));
-            this.MenuPanel.Controls.Add(this.label2);
             this.MenuPanel.Controls.Add(this.SettingsPanel);
             this.MenuPanel.Controls.Add(this.GitHub);
             this.MenuPanel.Controls.Add(this.VsCPU);
@@ -108,14 +106,14 @@
             this.SettingsPanel.BackColor = System.Drawing.Color.Transparent;
             this.SettingsPanel.Controls.Add(this.BackToMM);
             this.SettingsPanel.Controls.Add(this.Language);
-            this.SettingsPanel.Controls.Add(this.Themes);
+            this.SettingsPanel.Controls.Add(this.SelectTheme);
             this.SettingsPanel.Controls.Add(this.label3);
             this.SettingsPanel.Controls.Add(this.BackToSettings);
             this.SettingsPanel.Controls.Add(this.ToggleDefault);
             this.SettingsPanel.Controls.Add(this.ToggleDark);
-            this.SettingsPanel.Location = new System.Drawing.Point(774, 104);
+            this.SettingsPanel.Location = new System.Drawing.Point(1135, 172);
             this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Size = new System.Drawing.Size(24, 38);
+            this.SettingsPanel.Size = new System.Drawing.Size(45, 88);
             this.SettingsPanel.TabIndex = 7;
             this.SettingsPanel.Visible = false;
             // 
@@ -158,25 +156,25 @@
             this.Language.TextColor = System.Drawing.Color.White;
             this.Language.UseVisualStyleBackColor = false;
             // 
-            // Themes
+            // SelectTheme
             // 
-            this.Themes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
-            this.Themes.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
-            this.Themes.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.Themes.BorderRadius = 0;
-            this.Themes.BorderSize = 0;
-            this.Themes.FlatAppearance.BorderSize = 0;
-            this.Themes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Themes.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.Themes.ForeColor = System.Drawing.Color.White;
-            this.Themes.Location = new System.Drawing.Point(510, 104);
-            this.Themes.Name = "Themes";
-            this.Themes.Size = new System.Drawing.Size(202, 48);
-            this.Themes.TabIndex = 1;
-            this.Themes.Text = "Theme";
-            this.Themes.TextColor = System.Drawing.Color.White;
-            this.Themes.UseVisualStyleBackColor = false;
-            this.Themes.Click += new System.EventHandler(this.Themes_Click);
+            this.SelectTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.SelectTheme.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.SelectTheme.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.SelectTheme.BorderRadius = 0;
+            this.SelectTheme.BorderSize = 0;
+            this.SelectTheme.FlatAppearance.BorderSize = 0;
+            this.SelectTheme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SelectTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.SelectTheme.ForeColor = System.Drawing.Color.White;
+            this.SelectTheme.Location = new System.Drawing.Point(510, 104);
+            this.SelectTheme.Name = "SelectTheme";
+            this.SelectTheme.Size = new System.Drawing.Size(202, 48);
+            this.SelectTheme.TabIndex = 1;
+            this.SelectTheme.Text = "Theme";
+            this.SelectTheme.TextColor = System.Drawing.Color.White;
+            this.SelectTheme.UseVisualStyleBackColor = false;
+            this.SelectTheme.Click += new System.EventHandler(this.SelectTheme_Click);
             // 
             // label3
             // 
@@ -252,6 +250,19 @@
             this.ToggleDark.Visible = false;
             this.ToggleDark.Click += new System.EventHandler(this.ToggleDark_Click);
             // 
+            // GitHub
+            // 
+            this.GitHub.Image = global::The_Tic_Tac_Toe_Game.Properties.Resources.Github;
+            this.GitHub.Location = new System.Drawing.Point(22, 571);
+            this.GitHub.Name = "GitHub";
+            this.GitHub.Size = new System.Drawing.Size(69, 56);
+            this.GitHub.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.GitHub.TabIndex = 6;
+            this.GitHub.TabStop = false;
+            this.GitHub.Click += new System.EventHandler(this.GitHub_Click);
+            this.GitHub.MouseEnter += new System.EventHandler(this.GitHub_MouseEnter);
+            this.GitHub.MouseLeave += new System.EventHandler(this.GitHub_MouseLeave);
+            // 
             // VsCPU
             // 
             this.VsCPU.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
@@ -259,7 +270,6 @@
             this.VsCPU.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.VsCPU.BorderRadius = 0;
             this.VsCPU.BorderSize = 0;
-            this.VsCPU.Enabled = false;
             this.VsCPU.FlatAppearance.BorderSize = 0;
             this.VsCPU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.VsCPU.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -341,28 +351,6 @@
             this.ExitApp.MouseEnter += new System.EventHandler(this.ExitApp_MouseEnter);
             this.ExitApp.MouseLeave += new System.EventHandler(this.ExitApp_MouseLeave);
             // 
-            // GitHub
-            // 
-            this.GitHub.Image = global::The_Tic_Tac_Toe_Game.Properties.Resources.Github;
-            this.GitHub.Location = new System.Drawing.Point(22, 571);
-            this.GitHub.Name = "GitHub";
-            this.GitHub.Size = new System.Drawing.Size(69, 56);
-            this.GitHub.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.GitHub.TabIndex = 6;
-            this.GitHub.TabStop = false;
-            this.GitHub.Click += new System.EventHandler(this.GitHub_Click);
-            this.GitHub.MouseEnter += new System.EventHandler(this.GitHub_MouseEnter);
-            this.GitHub.MouseLeave += new System.EventHandler(this.GitHub_MouseLeave);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(381, 265);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 37);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Locked";
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
@@ -381,9 +369,9 @@
             this.MenuPanel.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GitHub)).EndInit();
             this.MovePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExitApp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GitHub)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -401,13 +389,12 @@
         private IkarosControls.IkarosButton VsCPU;
         private System.Windows.Forms.Panel SettingsPanel;
         private System.Windows.Forms.Label label3;
-        private IkarosControls.IkarosButton Themes;
+        private IkarosControls.IkarosButton SelectTheme;
         private IkarosControls.IkarosButton BackToMM;
         private IkarosControls.IkarosButton Language;
         private IkarosControls.IkarosButton ToggleDefault;
         private IkarosControls.IkarosButton ToggleDark;
         private IkarosControls.IkarosButton BackToSettings;
-        private System.Windows.Forms.Label label2;
     }
 }
 

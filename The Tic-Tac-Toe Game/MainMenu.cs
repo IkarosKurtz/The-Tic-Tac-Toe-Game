@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using The_Tic_Tac_Toe_Game.Classes.Theme;
+using IkarosControls;
 
 namespace The_Tic_Tac_Toe_Game
 {
@@ -37,16 +39,16 @@ namespace The_Tic_Tac_Toe_Game
 
         private void ExitApp_MouseLeave(object sender, EventArgs e)
         {
-            ExitApp.BackColor = Classes.Themes.TopPanelIconsFalse;
+            ExitApp.BackColor = Themes.TopPanelIconsFalse;
         }
 
         private void ExitApp_MouseEnter(object sender, EventArgs e)
         {
-            ExitApp.BackColor = Classes.Themes.TopPanelIconsTrue;
+            ExitApp.BackColor = Themes.TopPanelIconsTrue;
         }
         #endregion
 
-        // Open the different sections
+        // Open the selected mode
         private Form currentBoard = null;
         private void OpenBoard(Form Board)
         {
@@ -91,12 +93,12 @@ namespace The_Tic_Tac_Toe_Game
         // Render
         private void Rerender()
         {
-            IkarosControls.IkarosButton[] buttons = {
+            IkarosButton[] buttons = {
             PvP, 
             Confi,
             ExitToDesktop,
             VsCPU,
-            Themes,
+            SelectTheme,
             ToggleDefault,
             ToggleDark,
             BackToSettings,
@@ -104,13 +106,13 @@ namespace The_Tic_Tac_Toe_Game
             Language
 
             };
-            MenuPanel.BackColor = Classes.Themes.MenuColor;
-            MovePanel.BackColor = Classes.Themes.TopPanel;
-            SettingsPanel.BackColor = Classes.Themes.MenuColor;
+            MenuPanel.BackColor = Themes.MenuColor;
+            MovePanel.BackColor = Themes.TopPanel;
+            SettingsPanel.BackColor = Themes.MenuColor;
 
             for (int i = 0; i < buttons.Length; i++)
             {
-                buttons[i].BackColor = Classes.Themes.ButtonsColor;
+                buttons[i].BackColor = Themes.ButtonsColor;
             }
         }
 
@@ -137,13 +139,13 @@ namespace The_Tic_Tac_Toe_Game
             SettingsPanel.Visible = false;
         }
 
-        private void Themes_Click(object sender, EventArgs e)
+        private void SelectTheme_Click(object sender, EventArgs e)
         {
             ToggleDark.Visible = true;
             ToggleDefault.Visible = true;
             BackToSettings.Visible = true;
 
-            Themes.Visible = false;
+            SelectTheme.Visible = false;
             Language.Visible = false;
             BackToMM.Visible = false;
         }
@@ -154,21 +156,21 @@ namespace The_Tic_Tac_Toe_Game
             ToggleDefault.Visible = false;
             BackToSettings.Visible = false;
 
-            Themes.Visible = true;
+            SelectTheme.Visible = true;
             Language.Visible = true;
             BackToMM.Visible = true;
         }
 
         private void ToggleDefault_Click(object sender, EventArgs e)
         {
-            Classes.Themes.ToggleTheme(0);
+            Themes.ToggleTheme(0);
             Rerender();
             ExitApp_MouseLeave(sender, e);
         }
 
         private void ToggleDark_Click(object sender, EventArgs e)
         {
-            Classes.Themes.ToggleTheme(1);
+            Themes.ToggleTheme(1);
             Rerender();
             ExitApp_MouseLeave(sender, e);
         }

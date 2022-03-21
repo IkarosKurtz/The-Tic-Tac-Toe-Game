@@ -39,6 +39,7 @@
             this.Turn = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Winner = new System.Windows.Forms.Label();
+            this.CPUTime = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Turn)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -166,6 +167,11 @@
             this.Winner.Text = "Winner";
             this.Winner.Visible = false;
             // 
+            // CPUTime
+            // 
+            this.CPUTime.Interval = 1500;
+            this.CPUTime.Tick += new System.EventHandler(this.CPUTime_Tick);
+            // 
             // Board
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
@@ -205,5 +211,6 @@
         private System.Windows.Forms.Label SecondPlayerScore;
         private System.Windows.Forms.PictureBox Turn;
         private System.Windows.Forms.Timer ThinkAni;
+        private System.Windows.Forms.Timer CPUTime;
     }
 }
