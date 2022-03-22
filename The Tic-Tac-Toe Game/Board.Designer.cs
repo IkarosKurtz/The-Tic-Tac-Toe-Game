@@ -40,6 +40,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.Winner = new System.Windows.Forms.Label();
             this.CPUTime = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Turn)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -172,12 +173,22 @@
             this.CPUTime.Interval = 1500;
             this.CPUTime.Tick += new System.EventHandler(this.CPUTime_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1065, 315);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 37);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "label1";
+            // 
             // Board
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Turn);
             this.Controls.Add(this.SecondPlayerScore);
             this.Controls.Add(this.FirstPlayerScore);
@@ -212,5 +223,6 @@
         private System.Windows.Forms.PictureBox Turn;
         private System.Windows.Forms.Timer ThinkAni;
         private System.Windows.Forms.Timer CPUTime;
+        private System.Windows.Forms.Label label1;
     }
 }
