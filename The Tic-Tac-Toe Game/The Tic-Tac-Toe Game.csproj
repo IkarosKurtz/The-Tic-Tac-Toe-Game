@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ikaros.IkarosControls">
       <HintPath>..\..\..\..\Ikaros.IkarosControls.dll</HintPath>
@@ -115,6 +118,7 @@
     <Content Include="bin\Debug\Resources\Winner_image_DefaultD.png" />
     <Content Include="bin\Debug\Resources\Winner_image_FirstPlayerD.png" />
     <Content Include="bin\Debug\Resources\Winner_image_SecondPlayerD.png" />
+    <Content Include="Logo.ico" />
     <Content Include="Resources\Winner_image_FirstPlayerD.png" />
     <Content Include="Resources\Winner_image_SecondPlayerD.png" />
   </ItemGroup>

@@ -20,7 +20,6 @@ namespace The_Tic_Tac_Toe_Game
         static IkarosButton[,] SecondFloor = new IkarosButton[3, 3];
         static IkarosButton[,] ThirdFloor = new IkarosButton[3, 3];
 
-        public bool firstPlayerStarts = false;
         public int index = 1, x = 322, y = 24, getTurn = 1;
         public int setDraw = 27;
         Color prevBoardColor = Themes.BoardColor;
@@ -36,6 +35,7 @@ namespace The_Tic_Tac_Toe_Game
             this.BackColor = Themes.BackGroundColor;
             Restart.BackColor = Themes.BoardColor;
             BackToMM.BackColor = Themes.BoardColor;
+            Developer.Height = 0;
 
             if(boardType == 0)
                 PlayerVsPlayer();
@@ -50,7 +50,6 @@ namespace The_Tic_Tac_Toe_Game
         private void PlayerVsPlayer()
         {
             // First part of the board
-            firstPlayerStarts = false;
             FirstFloor[0, 0] = new IkarosButton();
             for (int i = 0; i < 3; i++)
             {
@@ -172,7 +171,6 @@ namespace The_Tic_Tac_Toe_Game
             Restart.BackColor = Themes.BoardColor;
 
             // First part of the board
-            firstPlayerStarts = false;
             FirstFloor[0, 0] = new IkarosButton();
             for (int i = 0; i < 3; i++)
             {
@@ -261,6 +259,8 @@ namespace The_Tic_Tac_Toe_Game
                 CPUTime.Start();
             }
 
+            
+
             setDraw--;
 
             if (setDraw != 0)
@@ -301,296 +301,11 @@ namespace The_Tic_Tac_Toe_Game
             hisTurn = false;
         }
 
-        // Dynamic Difficulty
-        int DynamicDifficulty = 3;
-
-        private void Hard()
-        {
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[1, 0].BackColor == Themes.BoardColor)
-                    AI(1, 0, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 1].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 1].BackColor == Themes.BoardColor)
-                    AI(2, 1, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 1].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 1].BackColor == Themes.BoardColor)
-                    AI(0, 1, 1);
-            }
-
-            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 1);
-            }
-        }
-
-        private void Normal()
-        {
-            if (FirstFloor[1, 2].BackColor == Themes.FirstPlayer && FirstFloor[1, 2].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 1);
-            }
-
-            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[1, 2].BackColor == Themes.BoardColor)
-                    AI(1, 2, 1);
-            }
-
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 1);
-            }
-
-            if (FirstFloor[2, 1].BackColor == Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 1);
-            }
-
-            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 1);
-            }
-        }
-
-        private void Easy()
-        {
-            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 1);
-            }
-
-            if (FirstFloor[2, 1].BackColor == Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 1);
-            }
-
-            if (FirstFloor[1, 0].BackColor == Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 1);
-            }
-
-            if (FirstFloor[1, 0].BackColor == Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 1);
-            }
-
-            if (FirstFloor[1, 2].BackColor == Themes.FirstPlayer && FirstFloor[1, 2].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 1);
-            }
-        }
-
-        // Other stuff
-        private void ThinkAni_Tick(object sender, EventArgs e)
-        {
-            if(index == 1)
-            {
-                SecondThink.Text += ".";
-                if (SecondThink.Text == "....")
-                    SecondThink.Text = "";
-            }
-            else
-            {
-                FirstThink.Text += ".";
-                if (FirstThink.Text == "....")
-                    FirstThink.Text = "";
-            }
-        }
-
         private void CPUTime_Tick(object sender, EventArgs e)
         {
             String index2 = null;
             index++;
             label1.Text = index.ToString();
-
-            // Columns
-            if (SecondFloor[0, 1].BackColor == Themes.FirstPlayer && SecondFloor[0, 1].BackColor == SecondFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 2);
-            }
-
-            if (SecondFloor[0, 1].BackColor == Themes.FirstPlayer && SecondFloor[0, 1].BackColor == SecondFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 2);
-            }
-
-            if (SecondFloor[2, 1].BackColor == Themes.FirstPlayer && SecondFloor[2, 1].BackColor == SecondFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 2);
-            }
-
-            if (SecondFloor[2, 1].BackColor == Themes.FirstPlayer && SecondFloor[2, 1].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 2);
-            }
-
-            // Rows
-            if (SecondFloor[1, 0].BackColor == Themes.FirstPlayer && SecondFloor[1, 0].BackColor == SecondFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 2);
-            }
-
-            if (SecondFloor[1, 0].BackColor == Themes.FirstPlayer && SecondFloor[1, 0].BackColor == SecondFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 2);
-            }
-
-            if (SecondFloor[1, 2].BackColor == Themes.FirstPlayer && SecondFloor[1, 2].BackColor == SecondFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 2);
-            }
-
-            if (SecondFloor[1, 2].BackColor == Themes.FirstPlayer && SecondFloor[1, 2].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (SecondFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 2);
-            }
-
-            /////////////////////////////////////////////////
-
-            // Columns
-            if (ThirdFloor[0, 1].BackColor == Themes.FirstPlayer && ThirdFloor[0, 1].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 3);
-            }
-
-            if (ThirdFloor[0, 1].BackColor == Themes.FirstPlayer && ThirdFloor[0, 1].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[1, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[1, 2].BackColor == Themes.BoardColor)
-                    AI(1, 2, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[1, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[1, 0].BackColor == Themes.BoardColor)
-                    AI(1, 0, 3);
-            }
-
-
-            if (ThirdFloor[2, 1].BackColor == Themes.FirstPlayer && ThirdFloor[2, 1].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 3);
-            }
-
-            if (ThirdFloor[2, 1].BackColor == Themes.FirstPlayer && ThirdFloor[2, 1].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 3);
-            }
-
-            // Rows
-            if (ThirdFloor[1, 0].BackColor == Themes.FirstPlayer && ThirdFloor[1, 0].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 3);
-            }
-
-            if (ThirdFloor[1, 0].BackColor == Themes.FirstPlayer && ThirdFloor[1, 0].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 1].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 1].BackColor == Themes.BoardColor)
-                    AI(2, 1, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 1].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 1].BackColor == Themes.BoardColor)
-                    AI(0, 1, 3);
-            }
-
-            if (ThirdFloor[1, 2].BackColor == Themes.FirstPlayer && ThirdFloor[1, 2].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 3);
-            }
-
-            if (ThirdFloor[1, 2].BackColor == Themes.FirstPlayer && ThirdFloor[1, 2].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 3);
-            }
-
-            // Diagonal
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
-                    AI(2, 2, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
-                    AI(0, 0, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
-                    AI(0, 2, 3);
-            }
-
-            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
-            {
-                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
-                    AI(2, 0, 3);
-            }
-
-
 
             if (DynamicDifficulty == 3)
             {
@@ -611,13 +326,16 @@ namespace The_Tic_Tac_Toe_Game
                 }
             }
 
+
+            // the function of stop is don't make an infinite loop
+
             int I, K, stop = 0, FloorNo;
             Random random = new Random();
 
-            FloorNo = random.Next(1,4);
+            FloorNo = random.Next(1, 4);
             if (hisTurn == true)
             {
-                if(FloorNo == 1)
+                if (FloorNo == 1)
                 {
                     stop = 0;
                     do
@@ -669,6 +387,402 @@ namespace The_Tic_Tac_Toe_Game
             }
 
             CPUTime.Stop();
+        }
+
+        // Dynamic Difficulty
+        int DynamicDifficulty = 3;
+
+        private void Hard()
+        {
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 0].BackColor == Themes.BoardColor)
+                    AI(1, 0, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 1].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 1].BackColor == Themes.BoardColor)
+                    AI(2, 1, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 1].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 1].BackColor == Themes.BoardColor)
+                    AI(0, 1, 1);
+            }
+
+            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 1);
+            }
+
+            if (SecondFloor[1, 0].BackColor == Themes.FirstPlayer && SecondFloor[1, 0].BackColor == SecondFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 2);
+            }
+
+            if (ThirdFloor[0, 1].BackColor == Themes.FirstPlayer && ThirdFloor[0, 1].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 3);
+            }
+
+            if (ThirdFloor[0, 1].BackColor == Themes.FirstPlayer && ThirdFloor[0, 1].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 3);
+            }
+
+            if (ThirdFloor[2, 1].BackColor == Themes.FirstPlayer && ThirdFloor[2, 1].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 3);
+            }
+
+            if (ThirdFloor[1, 0].BackColor == Themes.FirstPlayer && ThirdFloor[1, 0].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 3);
+            }
+
+            if (ThirdFloor[1, 2].BackColor == Themes.FirstPlayer && ThirdFloor[1, 2].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 3);
+            }
+
+            if (ThirdFloor[1, 2].BackColor == Themes.FirstPlayer && ThirdFloor[1, 2].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 3);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 3);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 3);
+            }
+
+            if (FirstFloor[0, 0].BackColor == Themes.FirstPlayer && FirstFloor[0, 0].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 1);
+            }
+
+            if (FirstFloor[0, 0].BackColor == Themes.FirstPlayer && FirstFloor[0, 0].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 1].BackColor == Themes.BoardColor)
+                    AI(0, 1, 1);
+            }
+
+            if (FirstFloor[0, 0].BackColor == Themes.FirstPlayer && FirstFloor[0, 0].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 0].BackColor == Themes.BoardColor)
+                    AI(1, 0, 1);
+            }
+
+            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[2, 1].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 1);
+            }
+
+            if (SecondFloor[0, 0].BackColor == Themes.FirstPlayer && SecondFloor[0, 0].BackColor == SecondFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[0, 1].BackColor == Themes.BoardColor)
+                    AI(0, 1, 2);
+            }
+
+            if (SecondFloor[2, 0].BackColor == Themes.FirstPlayer && SecondFloor[2, 0].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[2, 1].BackColor == Themes.BoardColor)
+                    AI(2, 1, 2);
+            }
+
+            if (ThirdFloor[0, 1].BackColor == Themes.FirstPlayer && ThirdFloor[0, 1].BackColor == ThirdFloor[2, 1].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 3);
+            }
+
+            if (ThirdFloor[0, 2].BackColor == Themes.FirstPlayer && ThirdFloor[0, 2].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 2].BackColor == Themes.BoardColor)
+                    AI(1, 2, 3);
+            }
+        }
+
+        private void Normal()
+        {
+            if (FirstFloor[1, 2].BackColor == Themes.FirstPlayer && FirstFloor[1, 2].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 1);
+            }
+
+            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 2].BackColor == Themes.BoardColor)
+                    AI(1, 2, 1);
+            }
+
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 1);
+            }
+
+            if (FirstFloor[2, 1].BackColor == Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 1);
+            }
+
+            if (FirstFloor[0, 1].BackColor == Themes.FirstPlayer && FirstFloor[0, 1].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 1);
+            }
+
+            if (SecondFloor[0, 1].BackColor == Themes.FirstPlayer && SecondFloor[0, 1].BackColor == SecondFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 2);
+            }
+
+            if (SecondFloor[2, 1].BackColor == Themes.FirstPlayer && SecondFloor[2, 1].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 2);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 3);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 3);
+            }
+
+            if (ThirdFloor[1, 0].BackColor == Themes.FirstPlayer && ThirdFloor[1, 0].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 3);
+            }
+
+            if (SecondFloor[1, 0].BackColor == Themes.FirstPlayer && SecondFloor[1, 0].BackColor == SecondFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 2);
+            }
+
+            if (SecondFloor[1, 2].BackColor == Themes.FirstPlayer && SecondFloor[1, 2].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[0, 2].BackColor == Themes.BoardColor)
+                    AI(0, 2, 2);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[1, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 0].BackColor == Themes.BoardColor)
+                    AI(1, 0, 3);
+            }
+
+
+            if (ThirdFloor[2, 1].BackColor == Themes.FirstPlayer && ThirdFloor[2, 1].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 3);
+            }
+
+            if (FirstFloor[1, 0].BackColor == Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[1, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 1);
+            }
+
+            if (FirstFloor[2, 0].BackColor == Themes.FirstPlayer && FirstFloor[2, 0].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 1].BackColor == Themes.BoardColor)
+                    AI(2, 1, 1);
+            }
+
+            if (FirstFloor[0, 2].BackColor == Themes.FirstPlayer && FirstFloor[0, 2].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 2].BackColor == Themes.BoardColor)
+                    AI(1, 2, 1);
+            }
+
+            if (FirstFloor[2, 0].BackColor == Themes.FirstPlayer && FirstFloor[2, 0].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 1);
+            }
+
+            if (ThirdFloor[2, 0].BackColor == Themes.FirstPlayer && ThirdFloor[2, 0].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 1].BackColor == Themes.BoardColor)
+                    AI(2, 1, 3);
+            }
+
+            if (ThirdFloor[1, 0].BackColor == Themes.FirstPlayer && ThirdFloor[1, 0].BackColor == ThirdFloor[1, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 3);
+            }
+
+            if (ThirdFloor[0, 0].BackColor == Themes.FirstPlayer && ThirdFloor[0, 0].BackColor == ThirdFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 0].BackColor == Themes.BoardColor)
+                    AI(1, 0, 3);
+            }
+        }
+
+        private void Easy()
+        {
+            if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 1);
+            }
+
+            if (FirstFloor[2, 1].BackColor == Themes.FirstPlayer && FirstFloor[2, 1].BackColor == FirstFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 1);
+            }
+
+            if (FirstFloor[1, 0].BackColor == Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 1);
+            }
+
+            if (FirstFloor[1, 0].BackColor == Themes.FirstPlayer && FirstFloor[1, 0].BackColor == FirstFloor[0, 0].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 0].BackColor == Themes.BoardColor)
+                    AI(2, 0, 1);
+            }
+
+            if (FirstFloor[1, 2].BackColor == Themes.FirstPlayer && FirstFloor[1, 2].BackColor == FirstFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (FirstFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 1);
+            }
+
+            if (SecondFloor[0, 1].BackColor == Themes.FirstPlayer && SecondFloor[0, 1].BackColor == SecondFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[0, 0].BackColor == Themes.BoardColor)
+                    AI(0, 0, 2);
+            }
+
+            if (SecondFloor[2, 1].BackColor == Themes.FirstPlayer && SecondFloor[2, 1].BackColor == SecondFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 2);
+            }
+
+            if (SecondFloor[1, 2].BackColor == Themes.FirstPlayer && SecondFloor[1, 2].BackColor == SecondFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[2, 2].BackColor == Themes.BoardColor)
+                    AI(2, 2, 2);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[1, 0].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 2].BackColor == Themes.BoardColor)
+                    AI(1, 2, 3);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[0, 1].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[2, 1].BackColor == Themes.BoardColor)
+                    AI(2, 1, 3);
+            }
+
+            if (ThirdFloor[1, 1].BackColor == Themes.FirstPlayer && ThirdFloor[1, 1].BackColor == ThirdFloor[2, 1].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 1].BackColor == Themes.BoardColor)
+                    AI(0, 1, 3);
+            }
+
+            if (SecondFloor[0, 0].BackColor == Themes.FirstPlayer && SecondFloor[0, 0].BackColor == SecondFloor[2, 0].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[1, 0].BackColor == Themes.BoardColor)
+                    AI(1, 0, 2);
+            }
+
+            if (SecondFloor[0, 2].BackColor == Themes.FirstPlayer && SecondFloor[0, 2].BackColor == SecondFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (SecondFloor[1, 2].BackColor == Themes.BoardColor)
+                    AI(1, 2, 2);
+            }
+
+            if (ThirdFloor[0, 0].BackColor == Themes.FirstPlayer && ThirdFloor[0, 0].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[0, 1].BackColor == Themes.BoardColor)
+                    AI(0, 1, 3);
+            }
+
+            if (ThirdFloor[0, 0].BackColor == Themes.FirstPlayer && ThirdFloor[0, 0].BackColor == ThirdFloor[2, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 3);
+            }
+
+            if (ThirdFloor[2, 0].BackColor == Themes.FirstPlayer && ThirdFloor[2, 0].BackColor == ThirdFloor[0, 2].BackColor && hisTurn == true)
+            {
+                if (ThirdFloor[1, 1].BackColor == Themes.BoardColor)
+                    AI(1, 1, 3);
+            }
+        }
+
+        // Other stuff
+        private void ThinkAni_Tick(object sender, EventArgs e)
+        {
+            if(index == 1)
+            {
+                SecondThink.Text += ".";
+                if (SecondThink.Text == "....")
+                    SecondThink.Text = "";
+            }
+            else
+            {
+                FirstThink.Text += ".";
+                if (FirstThink.Text == "....")
+                    FirstThink.Text = "";
+            }
         }
 
         private void ValidateWinner(String index2)
@@ -732,6 +846,33 @@ namespace The_Tic_Tac_Toe_Game
                 WinnerMessage(index2);
             if (FirstFloor[0, 2].BackgroundColor == SecondFloor[1, 2].BackgroundColor && FirstFloor[0, 2].BackgroundColor == ThirdFloor[2, 2].BackgroundColor && FirstFloor[0, 2].BackgroundColor != Themes.BoardColor)
                 WinnerMessage(index2);
+        }
+
+        private void DD1_Click(object sender, EventArgs e)
+        {
+            DynamicDifficulty = 1;
+        }
+
+        private void DD2_Click(object sender, EventArgs e)
+        {
+            DynamicDifficulty = 2;
+        }
+
+        private void DD3_Click(object sender, EventArgs e)
+        {
+            DynamicDifficulty = 3;
+        }
+
+        private void Board_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //1264, 103
+            if (e.KeyChar == Convert.ToChar(Keys.C))
+            {
+                if (Developer.Height == 0)
+                    Developer.Height = 103;
+                else
+                    Developer.Height = 0;
+            }
         }
 
         // Winner Message
