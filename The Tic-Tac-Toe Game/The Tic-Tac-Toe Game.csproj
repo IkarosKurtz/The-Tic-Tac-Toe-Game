@@ -36,8 +36,9 @@
     <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ikaros.IkarosControls">
-      <HintPath>..\..\..\..\Ikaros.IkarosControls.dll</HintPath>
+    <Reference Include="IkarosKurtz.IkarosControls, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\IkarosKurtz.IkarosControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,18 +77,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -108,6 +109,7 @@
     <None Include="Resources\Github.png" />
     <None Include="Resources\black-up-arrow-png-6.png" />
     <None Include="Resources\png-clipart-arrow-down-android-down-arrow-hand-desktop-wallpaper-thumbnail.png" />
+    <Content Include="bin\Debug\IkarosKurtz.IkarosControls.dll" />
     <Content Include="bin\Debug\Resources\Arrow down.png" />
     <Content Include="bin\Debug\Resources\Arrow up.png" />
     <Content Include="bin\Debug\Resources\Arrow_down.png" />
@@ -119,8 +121,16 @@
     <Content Include="bin\Debug\Resources\Winner_image_FirstPlayerD.png" />
     <Content Include="bin\Debug\Resources\Winner_image_SecondPlayerD.png" />
     <Content Include="Logo.ico" />
+    <Content Include="Resources\Arrow down.png" />
+    <Content Include="Resources\Arrow up.png" />
+    <Content Include="Resources\Arrow_down.png" />
+    <Content Include="Resources\Arrow_up.png" />
+    <None Include="Resources\Github focus.png" />
     <Content Include="Resources\Winner_image_FirstPlayerD.png" />
     <Content Include="Resources\Winner_image_SecondPlayerD.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\DarkTheme\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

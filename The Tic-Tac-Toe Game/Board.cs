@@ -8,11 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using The_Tic_Tac_Toe_Game.Classes.Theme;
+using The_Tic_Tac_Toe_Game.Classes.Langugae;
 using IkarosControls;
 using System.Threading;
 
 namespace The_Tic_Tac_Toe_Game
 {
+    public enum TypeOfBoard
+    {
+        PlayerVsPlayer,
+        PlayerVsComputer
+    }
+    
     public partial class Board : Form
     {
         // Fields
@@ -21,7 +28,9 @@ namespace The_Tic_Tac_Toe_Game
         static IkarosButton[,] ThirdFloor = new IkarosButton[3, 3];
 
         public int index = 1, x = 322, y = 24, getTurn = 1;
-        public int setDraw = 27;
+        public int setDraw = 26;
+        int loseTimes = 0, winTimes = 0;
+        TypeOfBoard typeOfBoard;
         Color prevBoardColor = Themes.BoardColor;
 
         string setTurn => getTurn == 1 ? "X" : "O";
@@ -35,9 +44,12 @@ namespace The_Tic_Tac_Toe_Game
             this.BackColor = Themes.BackGroundColor;
             Restart.BackColor = Themes.BoardColor;
             BackToMM.BackColor = Themes.BoardColor;
-            Developer.Height = 0;
+            Restart.Text = Languages.Restart;
+            BackToMM.Text = Languages.MainMenu;
 
-            if(boardType == 0)
+            SecondPlayerScore.Text = Environment.UserName;
+
+            if (boardType == 0)
                 PlayerVsPlayer();
             else
                 PlayerVsCpu();
@@ -49,6 +61,9 @@ namespace The_Tic_Tac_Toe_Game
         // Player vs player board
         private void PlayerVsPlayer()
         {
+            FirstPlayerScore.Text = Languages.Player2;
+            typeOfBoard = TypeOfBoard.PlayerVsPlayer;
+
             // First part of the board
             FirstFloor[0, 0] = new IkarosButton();
             for (int i = 0; i < 3; i++)
@@ -132,9 +147,8 @@ namespace The_Tic_Tac_Toe_Game
                     clicked.BackgroundColor = Themes.FirstPlayer;
                     index--;
                     SecondThink.Text = "";
-                    Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_down.png");
+                    Turn.Image = new Bitmap(Properties.Resources.Arrow_down);
                     index2 = "1";
-
                     
                 }
                 else
@@ -144,7 +158,7 @@ namespace The_Tic_Tac_Toe_Game
                     clicked.BackgroundColor = Themes.SecondPlayer;
                     index++;
                     FirstThink.Text = "";
-                    Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_up.png");
+                    Turn.Image = new Bitmap(Properties.Resources.Arrow_up);
                     index2 = "2";
                 }
 
@@ -157,7 +171,7 @@ namespace The_Tic_Tac_Toe_Game
                 else // Draw
                 {
                     Winner.Text = "Draw";
-                    panel1.BackgroundImage = new Bitmap(Application.StartupPath + @"\Resources\Winner_image_default.png");
+                    panel1.BackgroundImage = new Bitmap(Properties.Resources.Winner_image_default);
                 }
             }
         }
@@ -165,6 +179,7 @@ namespace The_Tic_Tac_Toe_Game
         // Player vs CPU board
         private void PlayerVsCpu()
         {
+            typeOfBoard = TypeOfBoard.PlayerVsComputer;
             // Recolor Controls
             this.BackColor = Themes.BackGroundColor;
             BackToMM.BackColor = Themes.BoardColor;
@@ -254,14 +269,26 @@ namespace The_Tic_Tac_Toe_Game
                 index--;
                 hisTurn = true;
                 SecondThink.Text = "";
-                Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_down.png");
+                Turn.Image = new Bitmap(Properties.Resources.Arrow_down);
                 index2 = "1";
-                CPUTime.Start();
             }
 
-            
+            if(hisTurn)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        FirstFloor[i, j].Enabled = false;
+                        SecondFloor[i, j].Enabled = false;
+                        ThirdFloor[i, j].Enabled = false;
+                    }
+                }
 
-            setDraw--;
+                CPUTime.Start();
+
+                setDraw--;
+            }
 
             if (setDraw != 0)
             {
@@ -270,7 +297,7 @@ namespace The_Tic_Tac_Toe_Game
             else // Draw
             {
                 Winner.Text = "Draw";
-                panel1.BackgroundImage = new Bitmap(Application.StartupPath + @"\Resources\Winner_image_default.png");
+                panel1.BackgroundImage = new Bitmap(Properties.Resources.Winner_image_default);
             }
 
             
@@ -295,9 +322,9 @@ namespace The_Tic_Tac_Toe_Game
                 ThirdFloor[x, y].Text = "X";
             }
 
-            getTurn--;
+            getTurn++;
             FirstThink.Text = "";
-            Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_up.png");
+            Turn.Image = Properties.Resources.Arrow_up;
             hisTurn = false;
         }
 
@@ -305,7 +332,8 @@ namespace The_Tic_Tac_Toe_Game
         {
             String index2 = null;
             index++;
-            label1.Text = index.ToString();
+            
+            Check();
 
             if (DynamicDifficulty == 3)
             {
@@ -333,7 +361,7 @@ namespace The_Tic_Tac_Toe_Game
             Random random = new Random();
 
             FloorNo = random.Next(1, 4);
-            if (hisTurn == true)
+            if (hisTurn)
             {
                 if (FloorNo == 1)
                 {
@@ -343,8 +371,8 @@ namespace The_Tic_Tac_Toe_Game
                         I = random.Next(0, 3);
                         K = random.Next(0, 3);
                         stop++;
-                    } while (FirstFloor[I, K].BackColor != Themes.BoardColor && stop != 200);
-                    if (stop != 200)
+                    } while (FirstFloor[I, K].BackColor != Themes.BoardColor && stop != 500);
+                    if (stop != 500)
                         AI(I, K, 1);
                 }
                 if (FloorNo == 2)
@@ -355,8 +383,8 @@ namespace The_Tic_Tac_Toe_Game
                         I = random.Next(0, 3);
                         K = random.Next(0, 3);
                         stop++;
-                    } while (SecondFloor[I, K].BackColor != Themes.BoardColor && stop != 200);
-                    if (stop != 200)
+                    } while (SecondFloor[I, K].BackColor != Themes.BoardColor && stop != 500);
+                    if (stop != 500)
                         AI(I, K, 2);
                 }
                 if (FloorNo == 3)
@@ -367,14 +395,24 @@ namespace The_Tic_Tac_Toe_Game
                         I = random.Next(0, 3);
                         K = random.Next(0, 3);
                         stop++;
-                    } while (ThirdFloor[I, K].BackColor != Themes.BoardColor && stop != 200);
-                    if (stop != 200)
+                    } while (ThirdFloor[I, K].BackColor != Themes.BoardColor && stop != 500);
+                    if (stop != 500)
                         AI(I, K, 3);
                 }
             }
 
             index2 = "2";
             setDraw--;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    FirstFloor[i, j].Enabled = true;
+                    SecondFloor[i, j].Enabled = true;
+                    ThirdFloor[i, j].Enabled = true;
+                }
+            }            
 
             if (setDraw != 0)
             {
@@ -383,15 +421,353 @@ namespace The_Tic_Tac_Toe_Game
             else // Draw
             {
                 Winner.Text = "Draw";
-                panel1.BackgroundImage = new Bitmap(Application.StartupPath + @"\Resources\Winner_image_default.png");
+                panel1.BackgroundImage = Properties.Resources.Winner_image_default;
             }
+
+            
+
+            SecondFloor[1, 1].Enabled = false;
 
             CPUTime.Stop();
         }
 
         // Dynamic Difficulty
         int DynamicDifficulty = 3;
+        
 
+        #region Apunta a ganar
+
+        void Check()
+        {
+            int Porcentaje = 0;
+
+            if (DynamicDifficulty == 3)
+                Porcentaje = 1;
+
+            if (DynamicDifficulty == 2)
+                Porcentaje = new Random().Next(1, 3);
+
+            if (DynamicDifficulty <= 1)
+                Porcentaje = new Random().Next(1, 4);
+
+            // Debug
+            Console.WriteLine($"Porcentaje: {Porcentaje}");
+            Console.WriteLine($"DynamicDifficulty: {DynamicDifficulty}");
+            Console.WriteLine($"Turn: {getTurn}");
+            Console.WriteLine($"CPU Turn: {hisTurn}");
+
+            if (Porcentaje == 1)
+            {
+                int colorCounterVertical = 0, colorCounterHorizontal = 0, colorCounterDiagonal = 0, colorCounterDiagonal2 = 0;
+                bool checkOut = false;
+
+                // Check First Floor
+                for (int i = 0; i < 3; i++)
+                {
+                    colorCounterVertical = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (FirstFloor[i, j].BackColor == Themes.SecondPlayer)
+                            colorCounterVertical++;
+                    }
+
+                    if (colorCounterVertical >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (FirstFloor[i, j].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, j, 1);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+
+                    colorCounterHorizontal = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (FirstFloor[j, i].BackColor == Themes.SecondPlayer)
+                            colorCounterHorizontal++;
+                    }
+
+                    if (colorCounterHorizontal >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (FirstFloor[j, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, j, 1);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+                }
+                
+                /*
+                if (!checkOut)
+                {
+                    colorCounterDiagonal = 0;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (FirstFloor[i, i].BackColor == Themes.SecondPlayer)
+                            colorCounterDiagonal++;
+                    }
+
+                    if (colorCounterDiagonal >= 2)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            if (FirstFloor[i, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, i, 1);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (!checkOut)
+                    {
+                        colorCounterDiagonal2 = 0;
+                        for (int i = 2; i >= 0; i--)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                if (FirstFloor[i, j].BackColor == Themes.SecondPlayer)
+                                    colorCounterDiagonal2++;
+                            }
+                        }
+
+                        if (colorCounterDiagonal2 >= 2)
+                        {
+                            for (int i = 2; i >= 0; i--)
+                            {
+                                for (int j = 0; j < 3; j++)
+                                {
+                                    if (FirstFloor[i, j].BackColor == Themes.BoardColor)
+                                    {
+                                        AI(i, j, 1);
+                                        checkOut = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }*/
+
+
+                // Check Second Floor
+                for (int i = 0; i < 3; i++)
+                {
+                    if (checkOut)
+                        break;
+
+                    colorCounterVertical = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (SecondFloor[i, j].BackColor == Themes.SecondPlayer)
+                            colorCounterVertical++;
+                    }
+
+                    if (colorCounterVertical >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (SecondFloor[i, j].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, j, 2);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+
+                    colorCounterHorizontal = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (SecondFloor[j, i].BackColor == Themes.SecondPlayer)
+                            colorCounterHorizontal++;
+                    }
+
+                    if (colorCounterHorizontal >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (SecondFloor[j, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(j, i, 2);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+                }
+                /*
+                if (!checkOut)
+                {
+                    colorCounterDiagonal = 0;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (SecondFloor[i, i].BackColor == Themes.SecondPlayer)
+                            colorCounterDiagonal++;
+                    }
+
+                    if (colorCounterDiagonal >= 2)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            if (SecondFloor[i, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, i, 2);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (!checkOut)
+                    {
+                        colorCounterDiagonal2 = 0;
+                        for (int i = 2; i >= 0; i--)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                if (SecondFloor[i, j].BackColor == Themes.SecondPlayer)
+                                    colorCounterDiagonal2++;
+                            }
+                        }
+
+                        if (colorCounterDiagonal2 >= 2)
+                        {
+                            for (int i = 2; i >= 0; i--)
+                            {
+                                for (int j = 0; j < 3; j++)
+                                {
+                                    if (SecondFloor[i, j].BackColor == Themes.BoardColor)
+                                    {
+                                        AI(i, j, 2);
+                                        checkOut = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }*/
+
+                // check Third Floor
+                for (int i = 0; i < 3; i++)
+                {
+                    if (checkOut)
+                        break;
+
+                    colorCounterVertical = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (ThirdFloor[i, j].BackColor == Themes.SecondPlayer)
+                            colorCounterVertical++;
+                    }
+
+                    if (colorCounterVertical >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (ThirdFloor[i, j].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, j, 3);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+
+                    colorCounterHorizontal = 0;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (ThirdFloor[j, i].BackColor == Themes.SecondPlayer)
+                            colorCounterHorizontal++;
+                    }
+
+                    if (colorCounterHorizontal >= 2)
+                    {
+                        for (int j = 0; j < 3; j++)
+                        {
+                            if (ThirdFloor[j, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(j, i, 3);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if (checkOut)
+                        break;
+                }
+                /*
+                if (!checkOut)
+                {
+                    colorCounterDiagonal = 0;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (ThirdFloor[i, i].BackColor == Themes.SecondPlayer)
+                            colorCounterDiagonal++;
+                    }
+
+                    if (colorCounterDiagonal >= 2)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            if (ThirdFloor[i, i].BackColor == Themes.BoardColor)
+                            {
+                                AI(i, i, 3);
+                                checkOut = true;
+                            }
+                        }
+                    }
+
+                    if(!checkOut)
+                    {
+                        colorCounterDiagonal2 = 0;
+                        for (int i = 2; i >= 0; i--)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                if (ThirdFloor[i, j].BackColor == Themes.SecondPlayer)
+                                    colorCounterDiagonal2++;
+                            }
+                        }
+
+                        if (colorCounterDiagonal2 >= 2)
+                        {
+                            for (int i = 2; i >= 0; i--)
+                            {
+                                for (int j = 0; j < 3; j++)
+                                {
+                                    if (ThirdFloor[i, j].BackColor == Themes.BoardColor)
+                                    {
+                                        AI(i, j, 3);
+                                        checkOut = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }*/
+            }
+        }
+        
+        #endregion
+
+        #region Bloqueos
         private void Hard()
         {
             if (FirstFloor[1, 1].BackColor == Themes.FirstPlayer && FirstFloor[1, 1].BackColor == FirstFloor[1, 2].BackColor && hisTurn == true)
@@ -531,6 +907,8 @@ namespace The_Tic_Tac_Toe_Game
                 if (ThirdFloor[1, 2].BackColor == Themes.BoardColor)
                     AI(1, 2, 3);
             }
+
+            
         }
 
         private void Normal()
@@ -768,6 +1146,8 @@ namespace The_Tic_Tac_Toe_Game
             }
         }
 
+        #endregion
+
         // Other stuff
         private void ThinkAni_Tick(object sender, EventArgs e)
         {
@@ -848,57 +1228,54 @@ namespace The_Tic_Tac_Toe_Game
                 WinnerMessage(index2);
         }
 
-        private void DD1_Click(object sender, EventArgs e)
-        {
-            DynamicDifficulty = 1;
-        }
-
-        private void DD2_Click(object sender, EventArgs e)
-        {
-            DynamicDifficulty = 2;
-        }
-
-        private void DD3_Click(object sender, EventArgs e)
-        {
-            DynamicDifficulty = 3;
-        }
-
-        private void Board_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //1264, 103
-            if (e.KeyChar == Convert.ToChar(Keys.C))
-            {
-                if (Developer.Height == 0)
-                    Developer.Height = 103;
-                else
-                    Developer.Height = 0;
-            }
-        }
-
         // Winner Message
         private void WinnerMessage(string index2)
         {
-            Winner.Text = "Player " + index2 + " Win";
+            if(typeOfBoard == TypeOfBoard.PlayerVsPlayer)
+            {
+                if (index2 == "1")
+                {
+                    Winner.Text = $"{Environment.UserName} Win";
+                }
+                else
+                {
+                    Winner.Text = $"{Languages.Player2} Win";
+                }
+            }
+            else
+            {
+                if (index2 == "1")
+                {
+                    Winner.Text = $"{Environment.UserName} Win";
+                }
+                else
+                {
+                    Winner.Text = $"CPU Win";
+                }
+            }
 
             if (index == 1)
-                panel1.BackgroundImage = new Bitmap(Application.StartupPath + Themes.SecondPlayerBanner);
+            {
+                panel1.BackgroundImage = Themes.SecondPlayerBanner;
+                loseTimes++;
+            }
             else
-                panel1.BackgroundImage = new Bitmap(Application.StartupPath + Themes.FirstPlayerBanner);
+            {
+                panel1.BackgroundImage = Themes.FirstPlayerBanner;
+                winTimes++;
+            }
 
             panel1.Visible = true;
             Winner.Visible = true;
             CPUTime.Stop();
+            Console.WriteLine($"Loses: {loseTimes}");
+            Console.WriteLine($"Wins: {winTimes}");
 
-
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    FirstFloor[i, j].Enabled = false;
-                    SecondFloor[i, j].Enabled = false;
-                    ThirdFloor[i, j].Enabled = false;
                     Themes.BoardColor = Themes.ButtonsDisable;
-
 
                     // First Floor
                     if (FirstFloor[i, j].BackColor != Themes.FirstPlayer && FirstFloor[i, j].BackColor != Themes.SecondPlayer)
@@ -926,9 +1303,19 @@ namespace The_Tic_Tac_Toe_Game
                             ThirdFloor[i, j].BackColor = Themes.FirstPlayerDisable;
                         else
                             ThirdFloor[i, j].BackColor = Themes.SecondPlayerDisable;
-
                 }
             }
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    FirstFloor[i, j].Enabled = false;
+                    SecondFloor[i, j].Enabled = false;
+                    ThirdFloor[i, j].Enabled = false;
+                }
+            }
+
             SecondFloor[1, 1].BackColor = Themes.ButtonCanceled;
         }
 
@@ -937,6 +1324,8 @@ namespace The_Tic_Tac_Toe_Game
         {
             Restart_Click(sender, e);
             DynamicDifficulty = 3;
+            loseTimes = 0;
+            winTimes = 0;
             this.Close();
             ThinkAni.Stop();
         }
@@ -945,8 +1334,13 @@ namespace The_Tic_Tac_Toe_Game
             setDraw = 27;
             getTurn = 1;
             index = 1;
-            DynamicDifficulty--;
+            if (loseTimes % 2 == 0 && loseTimes != 0 && DynamicDifficulty > 0)
+                DynamicDifficulty--;
+
+            if (winTimes % 3 == 0 && winTimes != 0 && DynamicDifficulty < 4)
+                DynamicDifficulty++;
             hisTurn = false;
+            
             CPUTime.Stop();
 
             Themes.BoardColor = prevBoardColor;
@@ -954,7 +1348,7 @@ namespace The_Tic_Tac_Toe_Game
             Winner.Visible = false;
             FirstThink.Text = "";
             SecondThink.Text = "";
-            Turn.Image = new Bitmap(Application.StartupPath + @"\Resources\Arrow_up.png");
+            Turn.Image = Properties.Resources.Arrow_up;
 
             for (int i = 0; i < 3; i++)
             {

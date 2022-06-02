@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using The_Tic_Tac_Toe_Game.Classes.Theme;
+using The_Tic_Tac_Toe_Game.Classes.Langugae;
 using IkarosControls;
 
 namespace The_Tic_Tac_Toe_Game
@@ -103,7 +104,9 @@ namespace The_Tic_Tac_Toe_Game
             ToggleDark,
             BackToSettings,
             BackToMM,
-            Language
+            Language,
+            ChangeSpanish,
+            ChangeEnglish
 
             };
             MenuPanel.BackColor = Themes.MenuColor;
@@ -119,13 +122,13 @@ namespace The_Tic_Tac_Toe_Game
         // GitHub Icon
         private void GitHub_MouseEnter(object sender, EventArgs e)
         {
-            GitHub.Image = new Bitmap(Application.StartupPath + @"\Resources\Github focus.png");
+            GitHub.Image = new Bitmap(Properties.Resources.Github_focus);
             
         }
 
         private void GitHub_MouseLeave(object sender, EventArgs e)
         {
-            GitHub.Image = new Bitmap(Application.StartupPath + @"\Resources\Github.png");
+            GitHub.Image = new Bitmap(Properties.Resources.Github);
         }
 
         private void GitHub_Click(object sender, EventArgs e)
@@ -156,6 +159,9 @@ namespace The_Tic_Tac_Toe_Game
             ToggleDefault.Visible = false;
             BackToSettings.Visible = false;
 
+            ChangeSpanish.Visible = false;
+            ChangeEnglish.Visible = false;
+
             SelectTheme.Visible = true;
             Language.Visible = true;
             BackToMM.Visible = true;
@@ -173,6 +179,46 @@ namespace The_Tic_Tac_Toe_Game
             Themes.ToggleTheme(1);
             Rerender();
             ExitApp_MouseLeave(sender, e);
+        }
+
+        private void Language_Click(object sender, EventArgs e)
+        {
+            ChangeEnglish.Visible = true;
+            ChangeSpanish.Visible = true;
+            BackToSettings.Visible = true;
+
+            SelectTheme.Visible = false;
+            Language.Visible = false;
+            BackToMM.Visible = false;
+        }
+
+        private void ChangeSpanish_Click(object sender, EventArgs e)
+        {
+            Languages.ChangeLangugae(2);
+            ChangeText();
+        }
+
+        private void ChangeText()
+        {
+            Confi.Text = Languages.Settings;
+            ExitToDesktop.Text = Languages.Exit;
+            SelectTheme.Text = Languages.Theme;
+            BackToMM.Text = Languages.Back;
+            Language.Text = Languages.Language;
+            ChangeEnglish.Text = Languages.English;
+            ChangeSpanish.Text = Languages.Spanish;
+            ToggleDark.Text = Languages.Dark;
+            ToggleDefault.Text = Languages.Default;
+            BackToSettings.Text = Languages.Back;
+
+            label3.Text = Languages.Settings;
+
+        }
+
+        private void ChangeEnglish_Click(object sender, EventArgs e)
+        {
+            Languages.ChangeLangugae(1);
+            ChangeText();
         }
     }
 }

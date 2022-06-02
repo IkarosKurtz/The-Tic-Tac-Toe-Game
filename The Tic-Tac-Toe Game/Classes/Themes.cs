@@ -23,9 +23,9 @@ namespace The_Tic_Tac_Toe_Game.Classes.Theme
 
         public static Color ButtonCanceled = Color.FromArgb(46, 45, 46);
 
-        public static string FirstPlayerBanner = @"\Resources\Winner_image_FirstPlayer.png";
-        public static string SecondPlayerBanner = @"\Resources\Winner_image_SecondPlayer.png";
-        public static string DrawBanner = @"\Resources\Winner_image_Default.png";
+        public static Bitmap FirstPlayerBanner = Properties.Resources.Winner_image_FirstPlayerD;
+        public static Bitmap SecondPlayerBanner = Properties.Resources.Winner_image_SecondPlayerD;
+        public static Bitmap DrawBanner = Properties.Resources.Winner_image_default;
 
         // Default Theme
 
@@ -49,9 +49,9 @@ namespace The_Tic_Tac_Toe_Game.Classes.Theme
 
         private static readonly Color buttoncanceled = Color.FromArgb(46, 45, 46);
 
-        private static readonly string firstplayerbanner = @"\Resources\Winner_image_FirstPlayer.png";
-        private static readonly string secondplayerbanner = @"\Resources\Winner_image_SecondPlayer.png";
-        private static readonly string drawbanner = @"\Resources\Winner_image_Default.png";
+        private static readonly Bitmap firstplayerbanner = Properties.Resources.Winner_image_FirstPlayerD;
+        private static readonly Bitmap secondplayerbanner = Properties.Resources.Winner_image_SecondPlayerD;
+        private static readonly Bitmap drawbanner = Properties.Resources.Winner_image_default;
 
         #endregion Default
 
@@ -75,9 +75,9 @@ namespace The_Tic_Tac_Toe_Game.Classes.Theme
         private static readonly Color firstplayerdisableD = Color.FromArgb(167, 68, 69);
         private static readonly Color secondplayerdisableD = Color.FromArgb(76, 144, 125);
 
-        private static readonly string firstplayerbannerD = @"\Resources\Winner_image_FirstPlayer.png";
-        private static readonly string secondplayerbannerD = @"\Resources\Winner_image_SecondPlayer.png";
-        private static readonly string drawbannerD = @"\Resources\Winner_image_Default.png";
+        private static readonly Bitmap firstplayerbannerD = Properties.Resources.Winner_image_FirstPlayerD;
+        private static readonly Bitmap secondplayerbannerD = Properties.Resources.Winner_image_SecondPlayerD;
+        private static readonly Bitmap drawbannerD = Properties.Resources.Winner_image_default;
 
         #endregion Dark
 

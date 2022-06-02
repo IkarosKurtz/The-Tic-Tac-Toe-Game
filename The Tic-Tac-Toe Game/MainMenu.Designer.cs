@@ -40,6 +40,8 @@
             this.BackToSettings = new IkarosControls.IkarosButton();
             this.ToggleDefault = new IkarosControls.IkarosButton();
             this.ToggleDark = new IkarosControls.IkarosButton();
+            this.ChangeEnglish = new IkarosControls.IkarosButton();
+            this.ChangeSpanish = new IkarosControls.IkarosButton();
             this.GitHub = new System.Windows.Forms.PictureBox();
             this.VsCPU = new IkarosControls.IkarosButton();
             this.ExitToDesktop = new IkarosControls.IkarosButton();
@@ -55,7 +57,6 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(402, 18);
@@ -64,6 +65,7 @@
             this.label1.Size = new System.Drawing.Size(434, 46);
             this.label1.TabIndex = 0;
             this.label1.Text = "The Tic-Tac-Toe Game";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PvP
             // 
@@ -111,9 +113,11 @@
             this.SettingsPanel.Controls.Add(this.BackToSettings);
             this.SettingsPanel.Controls.Add(this.ToggleDefault);
             this.SettingsPanel.Controls.Add(this.ToggleDark);
-            this.SettingsPanel.Location = new System.Drawing.Point(1135, 172);
+            this.SettingsPanel.Controls.Add(this.ChangeEnglish);
+            this.SettingsPanel.Controls.Add(this.ChangeSpanish);
+            this.SettingsPanel.Location = new System.Drawing.Point(870, 195);
             this.SettingsPanel.Name = "SettingsPanel";
-            this.SettingsPanel.Size = new System.Drawing.Size(45, 88);
+            this.SettingsPanel.Size = new System.Drawing.Size(288, 200);
             this.SettingsPanel.TabIndex = 7;
             this.SettingsPanel.Visible = false;
             // 
@@ -155,6 +159,7 @@
             this.Language.Text = "Language";
             this.Language.TextColor = System.Drawing.Color.White;
             this.Language.UseVisualStyleBackColor = false;
+            this.Language.Click += new System.EventHandler(this.Language_Click);
             // 
             // SelectTheme
             // 
@@ -178,14 +183,14 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(538, 18);
+            this.label3.Location = new System.Drawing.Point(511, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 40);
+            this.label3.Size = new System.Drawing.Size(201, 40);
             this.label3.TabIndex = 0;
             this.label3.Text = "Settings";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BackToSettings
             // 
@@ -249,6 +254,48 @@
             this.ToggleDark.UseVisualStyleBackColor = false;
             this.ToggleDark.Visible = false;
             this.ToggleDark.Click += new System.EventHandler(this.ToggleDark_Click);
+            // 
+            // ChangeEnglish
+            // 
+            this.ChangeEnglish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.ChangeEnglish.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.ChangeEnglish.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ChangeEnglish.BorderRadius = 0;
+            this.ChangeEnglish.BorderSize = 0;
+            this.ChangeEnglish.FlatAppearance.BorderSize = 0;
+            this.ChangeEnglish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeEnglish.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.ChangeEnglish.ForeColor = System.Drawing.Color.White;
+            this.ChangeEnglish.Location = new System.Drawing.Point(511, 103);
+            this.ChangeEnglish.Name = "ChangeEnglish";
+            this.ChangeEnglish.Size = new System.Drawing.Size(202, 48);
+            this.ChangeEnglish.TabIndex = 8;
+            this.ChangeEnglish.Text = "English";
+            this.ChangeEnglish.TextColor = System.Drawing.Color.White;
+            this.ChangeEnglish.UseVisualStyleBackColor = false;
+            this.ChangeEnglish.Visible = false;
+            this.ChangeEnglish.Click += new System.EventHandler(this.ChangeEnglish_Click);
+            // 
+            // ChangeSpanish
+            // 
+            this.ChangeSpanish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.ChangeSpanish.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(139)))), ((int)(((byte)(116)))));
+            this.ChangeSpanish.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.ChangeSpanish.BorderRadius = 0;
+            this.ChangeSpanish.BorderSize = 0;
+            this.ChangeSpanish.FlatAppearance.BorderSize = 0;
+            this.ChangeSpanish.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeSpanish.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.ChangeSpanish.ForeColor = System.Drawing.Color.White;
+            this.ChangeSpanish.Location = new System.Drawing.Point(511, 175);
+            this.ChangeSpanish.Name = "ChangeSpanish";
+            this.ChangeSpanish.Size = new System.Drawing.Size(202, 48);
+            this.ChangeSpanish.TabIndex = 7;
+            this.ChangeSpanish.Text = "Spanish";
+            this.ChangeSpanish.TextColor = System.Drawing.Color.White;
+            this.ChangeSpanish.UseVisualStyleBackColor = false;
+            this.ChangeSpanish.Visible = false;
+            this.ChangeSpanish.Click += new System.EventHandler(this.ChangeSpanish_Click);
             // 
             // GitHub
             // 
@@ -340,7 +387,7 @@
             // ExitApp
             // 
             this.ExitApp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ExitApp.Image = global::The_Tic_Tac_Toe_Game.Properties.Resources.Exit_Icon;
+            this.ExitApp.Image = ((System.Drawing.Image)(resources.GetObject("ExitApp.Image")));
             this.ExitApp.Location = new System.Drawing.Point(1227, 5);
             this.ExitApp.Name = "ExitApp";
             this.ExitApp.Size = new System.Drawing.Size(25, 25);
@@ -366,9 +413,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.MenuPanel.ResumeLayout(false);
-            this.MenuPanel.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
-            this.SettingsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GitHub)).EndInit();
             this.MovePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ExitApp)).EndInit();
@@ -395,6 +440,8 @@
         private IkarosControls.IkarosButton ToggleDefault;
         private IkarosControls.IkarosButton ToggleDark;
         private IkarosControls.IkarosButton BackToSettings;
+        private IkarosControls.IkarosButton ChangeEnglish;
+        private IkarosControls.IkarosButton ChangeSpanish;
     }
 }
 
