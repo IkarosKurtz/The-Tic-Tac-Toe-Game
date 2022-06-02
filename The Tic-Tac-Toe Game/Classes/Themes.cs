@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace The_Tic_Tac_Toe_Game.Classes
+namespace The_Tic_Tac_Toe_Game.Classes.Theme
 {
     public static class Themes
     {
@@ -22,6 +22,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
         public static Color SecondPlayerDisable = Color.FromArgb(102, 178, 140);
 
         public static Color ButtonCanceled = Color.FromArgb(46, 45, 46);
+
+        public static Bitmap FirstPlayerBanner = Properties.Resources.Winner_image_FirstPlayerD;
+        public static Bitmap SecondPlayerBanner = Properties.Resources.Winner_image_SecondPlayerD;
+        public static Bitmap DrawBanner = Properties.Resources.Winner_image_default;
 
         // Default Theme
 
@@ -45,6 +49,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
 
         private static readonly Color buttoncanceled = Color.FromArgb(46, 45, 46);
 
+        private static readonly Bitmap firstplayerbanner = Properties.Resources.Winner_image_FirstPlayerD;
+        private static readonly Bitmap secondplayerbanner = Properties.Resources.Winner_image_SecondPlayerD;
+        private static readonly Bitmap drawbanner = Properties.Resources.Winner_image_default;
+
         #endregion Default
 
         // Dark Theme
@@ -62,10 +70,14 @@ namespace The_Tic_Tac_Toe_Game.Classes
         private static readonly Color iconsfalseD = Color.FromArgb(67, 64, 63);
 
         private static readonly Color buttonsdisableD = Color.FromArgb(28, 25, 28);
-        private static readonly Color firstplayerD = Color.FromArgb(88, 162, 125);
-        private static readonly Color secondplayerD = Color.FromArgb(185, 82, 84);
-        private static readonly Color firstplayerdisableD = Color.FromArgb(76, 144, 125);
-        private static readonly Color secondplayerdisableD = Color.FromArgb(167, 68, 69);
+        private static readonly Color firstplayerD = Color.FromArgb(185, 82, 84);
+        private static readonly Color secondplayerD = Color.FromArgb(88, 162, 125);
+        private static readonly Color firstplayerdisableD = Color.FromArgb(167, 68, 69);
+        private static readonly Color secondplayerdisableD = Color.FromArgb(76, 144, 125);
+
+        private static readonly Bitmap firstplayerbannerD = Properties.Resources.Winner_image_FirstPlayerD;
+        private static readonly Bitmap secondplayerbannerD = Properties.Resources.Winner_image_SecondPlayerD;
+        private static readonly Bitmap drawbannerD = Properties.Resources.Winner_image_default;
 
         #endregion Dark
 
@@ -90,6 +102,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
                     SecondPlayerDisable = secondplayerdisable;
                     ButtonCanceled = buttoncanceled;
 
+                    FirstPlayerBanner = firstplayerbanner;
+                    SecondPlayerBanner = secondplayerbanner;
+                    DrawBanner = drawbanner;
+
                     break;
 
                 case 1:
@@ -107,6 +123,10 @@ namespace The_Tic_Tac_Toe_Game.Classes
                     FirstPlayerDisable = firstplayerdisableD;
                     SecondPlayerDisable = secondplayerdisableD;
                     ButtonCanceled = buttoncanceled;
+
+                    FirstPlayerBanner = firstplayerbannerD;
+                    SecondPlayerBanner = secondplayerbannerD;
+                    DrawBanner = drawbannerD;
 
                     break;
             }

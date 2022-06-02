@@ -28,17 +28,11 @@ namespace The_Tic_Tac_Toe_Game
 
             ChooseTheme.Visible = false;
             Language.Visible = false;
-            MyGitHub.Visible = false;
             BackMainMenu.Visible = false;
 
             ToggleDefault.Visible = true;
             ToggleDark.Visible = true;
             BackSettings.Visible = true;
-        }
-
-        private void MyGitHub_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/IkarosKurtz/Tic-Tac-Toe");
         }
 
         private void BackMainMenu_Click(object sender, EventArgs e)
@@ -53,7 +47,6 @@ namespace The_Tic_Tac_Toe_Game
 
             ChooseTheme.Visible = true;
             Language.Visible = true;
-            MyGitHub.Visible = true;
             BackMainMenu.Visible = true;
 
             ToggleDefault.Visible = false;
@@ -82,7 +75,7 @@ namespace The_Tic_Tac_Toe_Game
         private void Rerender()
         {
             IkarosControls.IkarosButton[] buttons = {
-            ChooseTheme, BackMainMenu, BackSettings, Language, MyGitHub,ToggleDark, ToggleDefault
+            ChooseTheme, BackMainMenu, BackSettings, Language,ToggleDark, ToggleDefault
             };
             this.BackColor = Classes.Themes.MenuColor;
 
